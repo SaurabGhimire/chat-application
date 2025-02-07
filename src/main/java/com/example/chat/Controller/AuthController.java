@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody String username, @RequestBody String name, @RequestBody String password) {
-        // Signup logic
+        // Verify if username exists
+        // Verify password criteria
+        // Encrypt password
+        // Store data to users table
         return ResponseEntity.status(HttpStatus.CREATED).body("Sign up successful");
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody String username, @RequestBody String password) {
-        // Login logic
+        // Spring Security Login
         return ResponseEntity.ok("Login Successful");
     }
 

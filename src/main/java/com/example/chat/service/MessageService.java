@@ -3,6 +3,7 @@ package com.example.chat.service;
 import com.example.chat.Entity.Message;
 import com.example.chat.Exception.MessageNotFoundException;
 import com.example.chat.Repository.MessageRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,10 @@ import java.util.List;
 
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
 
-    @Autowired
-    private MessageRepository messageRepository;
+    private final MessageRepository messageRepository;
 
     public List<Message> getMessagesBySenderAndReceiver(String senderUsername, String receiverUsername) {
         return messageRepository.findBySenderAndReceiver(senderUsername, receiverUsername);
@@ -31,6 +32,10 @@ public class MessageService {
         Message message = getMessageById(id);
         message.setIsRead(true);
         return messageRepository.save(message);
+    }
+
+    public int markMessagesAsRead(String receiver,String sender){
+        return messageRepository.markMessagesAsRead(sender, receiver);
     }
 
     public int countUnreadMessages(String receiver, String sender) {

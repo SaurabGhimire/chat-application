@@ -19,8 +19,10 @@ public class Message {
     private int id;
     private String content;
     // TODO change sender username to sender id
+    // TODO Map using @ManyToOne to user table
     private String sender;
     // TODO change sender username to sender id
+    // TODO @ManyToOne to user table
     private String receiver;
     private boolean isRead;
     private Timestamp createdAt;

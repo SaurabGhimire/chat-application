@@ -36,34 +36,34 @@ function connect(event) {
 // on connect
 function onConnected() {
     console.log(receiver);
-    // Construct the full URL
-    const baseUrl = '/chats/history';
-    const params = new URLSearchParams({ receiverName: receiver, senderName: username });
-    const fullUrl = `${baseUrl}?${params.toString()}`;
-    // Fetch chat history from the server
-    fetch(fullUrl)
-        .then(response => response.json())
-        .then(data => {
-            // Iterate through chat history and display each message
-            data.forEach(message => {
-                displayMessage(message);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching chat history:', error);
-        });
+//    // Construct the full URL
+//    const baseUrl = '/chats/history';
+//    const params = new URLSearchParams({ receiverName: receiver, senderName: username });
+//    const fullUrl = `${baseUrl}?${params.toString()}`;
+//    // Fetch chat history from the server
+//    fetch(fullUrl)
+//        .then(response => response.json())
+//        .then(data => {
+//            // Iterate through chat history and display each message
+//            data.forEach(message => {
+//                displayMessage(message);
+//            });
+//        })
+//        .catch(error => {
+//            console.error('Error fetching chat history:', error);
+//        });
 
 
 
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/public', onMessageReceived);
-    stompClient.subscribe('/user/' + username +'/queue/messages', onMessageReceived);
+//    stompClient.subscribe('/topic/public', onMessageReceived);
+    stompClient.subscribe(`/user/${username}/queue/messages`, onMessageReceived);
 
     // Tell the server about the new user
-    stompClient.send("/app/chat.addUser",
-        {},
-        JSON.stringify({sender: username, type: 'JOIN'})
-    );
+//    stompClient.send("/app/chat.addUser",
+//        {},
+//        JSON.stringify({sender: username, type: 'JOIN'})
+//    );
 
     connectingElement.classList.add('hidden');
 }

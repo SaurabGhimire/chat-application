@@ -19,4 +19,8 @@ public class User {
     private String name;
     private String username;
     private String password;
+    //    @OneToMany(mappedBy = "receiver")
+    //    private List<Message> messagesReceived;
+    //    @OneToMany(mappedBy = "sender")
+    //    private List<Message> messagesSent;
 }
