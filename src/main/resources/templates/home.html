@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+</head>
+<body>
+<h1>Welcome, <span th:text="${username}">User</span></h1> <!-- Display logged-in username -->
+
+<div>
+    <a href="/logout">Logout</a> <!-- Logout link -->
+</div>
+</body>
+</html>
