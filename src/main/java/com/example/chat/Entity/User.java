@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,8 +22,4 @@ public class User {
     private String name;
     private String username;
     private String password;
-    //    @OneToMany(mappedBy = "receiver")
-    //    private List<Message> messagesReceived;
-    //    @OneToMany(mappedBy = "sender")
-    //    private List<Message> messagesSent;
 }

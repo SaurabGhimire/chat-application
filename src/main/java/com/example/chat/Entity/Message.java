@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -18,14 +21,16 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String content;
-    // TODO change sender username to sender id
-    // TODO Map using @ManyToOne to user table
-    private String sender;
-    // TODO change sender username to sender id
-    // TODO @ManyToOne to user table
-    private String receiver;
-    private boolean isRead;
-    private Timestamp createdAt;
+    @ManyToOne
+    @JoinColumn(name = "sender_id", nullable = false)
+    private User sender;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_id", nullable = false)
+    private User receiver;
+    private boolean isRead =false;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     public void setIsRead(boolean read) {
         this.isRead = true;

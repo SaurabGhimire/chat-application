@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    // Delete user
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUserAccount(@PathVariable Long id) {
         // make sure there is correct permissions

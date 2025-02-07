@@ -16,18 +16,21 @@ public class AuthController {
         // Verify password criteria
         // Encrypt password
         // Store data to users table
+        //
         return ResponseEntity.status(HttpStatus.CREATED).body("Sign up successful");
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody String username, @RequestBody String password) {
         // Spring Security Login
+        // Generate a jwt token on successful login
         return ResponseEntity.ok("Login Successful");
     }
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout() {
         // Logout logic
+        // Invalidate jwt token
         return ResponseEntity.ok("Logout Successful");
     }
 

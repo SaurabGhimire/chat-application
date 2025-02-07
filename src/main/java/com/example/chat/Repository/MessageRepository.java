@@ -13,14 +13,14 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Integer> {
 
-    List<Message> findBySenderAndReceiver(String sender, String receiver);
+    List<Message> findBySenderIdAndReceiverId(int senderId, int receiverId);
 
-    int countByReceiverAndSenderAndIsReadFalse(String receiver, String sender);
+    int countByReceiverIdAndSenderIdAndIsReadFalse(int receiverId, int senderId);
 
     @Modifying
     @Transactional
-    @Query("UPDATE Message m SET m.isRead = true WHERE m.sender = :sender AND m.receiver = :receiver AND m.isRead = false")
-    int markMessagesAsRead(@Param("sender") String sender, @Param("receiver") String receiver);
+    @Query("UPDATE Message m SET m.isRead = true WHERE m.sender.id = :senderId AND m.receiver.id = :receiverId AND m.isRead = false")
+    int markMessagesAsRead(@Param("senderId") int senderId, @Param("receiverId") int receiverId);
 
-    int countByReceiverAndIsReadFalse(String receiver);
+    int countByReceiverIdAndIsReadFalse(int receiverId);
 }

@@ -1,6 +1,8 @@
 package com.example.chat.Controller;
 
 import com.example.chat.Entity.Message;
+import com.example.chat.Entity.MessageDto;
+import com.example.chat.Entity.User;
 import com.example.chat.Repository.MessageRepository;
 import com.example.chat.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +30,15 @@ public class ChatController {
     // 3. A user can send a message to another user
     // WebSocket Endpoint; Pass user in receiver field of chatMessage
     // Send message to receiver and sender in endpoint
-    // Endpoint - /user/{receiverUsername}/queue/messages
-    // Endpoint - /user/{senderUsername}/queue/messages
+    // Endpoint - /user/{receiverId}/queue/messages
+    // Endpoint - /user/{senderId}/queue/messages
 //    @MessageMapping("/sendMessage") // Receives messages from "app/sendMessage"
 
     @MessageMapping("/sendMessage")
-    public void sendMessage(@Payload Message message) {
-        System.out.println(message.toString());
-        message.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        messagingTemplate.convertAndSendToUser(message.getSender(), "/queue/messages", message);
-        messagingTemplate.convertAndSendToUser(message.getReceiver(), "/queue/messages", message);
-        messageService.createMessage(message);
+    public void sendMessage(@Payload MessageDto messageDto) {
+        Message message = messageService.createMessage(messageDto);
+        messagingTemplate.convertAndSendToUser(message.getSender().getUsername(), "/queue/messages", message);
+        messagingTemplate.convertAndSendToUser(message.getReceiver().getUsername(), "/queue/messages", message);
     }
 }
 
